@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Catalogue Movie</string>
+    <string name="masukan_nama_film">Masukan Nama Film</string>
+    <string name="cari">Cari</string>
+</resources>
