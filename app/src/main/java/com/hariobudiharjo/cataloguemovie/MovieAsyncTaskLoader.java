@@ -61,7 +61,8 @@ public class MovieAsyncTaskLoader extends AsyncTaskLoader<ArrayList<MovieItems>>
     public ArrayList<MovieItems> loadInBackground() {
         SyncHttpClient client = new SyncHttpClient();
         final ArrayList<MovieItems> movieItems = new ArrayList<>();
-        String api_key = "f6d4b87f37b107f90af522238d98e349";
+//        String api_key = "f6d4b87f37b107f90af522238d98e349";
+        String api_key = BuildConfig.API_KEY;
         String url = "https://api.themoviedb.org/3/search/movie?query=" + judul + "&language=en-US&api_key=" + api_key;
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
@@ -75,7 +76,6 @@ public class MovieAsyncTaskLoader extends AsyncTaskLoader<ArrayList<MovieItems>>
                         MovieItems movieItem = new MovieItems(movie);
                         Log.d(TAG, "onSuccess: " + movieItem);
                         movieItems.add(movieItem);
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
