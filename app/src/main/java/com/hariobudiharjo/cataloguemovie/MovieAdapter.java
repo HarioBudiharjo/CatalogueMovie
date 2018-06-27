@@ -16,6 +16,9 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MovieAdapter extends BaseAdapter {
     private ArrayList<MovieItems> dataMovie = new ArrayList<>();
     private LayoutInflater layoutInflater;
@@ -23,7 +26,8 @@ public class MovieAdapter extends BaseAdapter {
 
     public MovieAdapter(Context context) {
         this.context = context;
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        layoutInflater = LayoutInflater.from(context);
     }
 
     public void setDataMovie(ArrayList<MovieItems> items) {
@@ -80,21 +84,31 @@ public class MovieAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MovieItems movieItems = new MovieItems();
+                movieItems.setGambar(dataMovie.get(position).getGambar());
+                movieItems.setJudul(dataMovie.get(position).getJudul());
+                movieItems.setDeskripsi(dataMovie.get(position).getDeskripsi());
+                movieItems.setRelease(dataMovie.get(position).getRelease());
                 Intent intent = new Intent(context, DetailMovieActivity.class);
-                intent.putExtra("IMAGE", dataMovie.get(position).getGambar());
-                intent.putExtra("JUDUL", dataMovie.get(position).getJudul());
-                intent.putExtra("DESKRIPSI", dataMovie.get(position).getDeskripsi());
-                intent.putExtra("RELEASE", dataMovie.get(position).getRelease());
+                intent.putExtra("MOVIE",movieItems);
                 context.startActivity(intent);
             }
         });
         return convertView;
     }
 
-    private static class ViewHolder {
+    static class ViewHolder {
+//        @BindView(R.id.textJudul)
         TextView tvJudul;
+//        @BindView(R.id.textDeskripsi)
         TextView tvDeskripsi;
+//        @BindView(R.id.textRelease)
         TextView tvRelease;
+//        @BindView(R.id.imageMovie)
         ImageView ivGambar;
+
+//        public ViewHolder(View view) {
+//            ButterKnife.bind(view);
+//        }
     }
 }

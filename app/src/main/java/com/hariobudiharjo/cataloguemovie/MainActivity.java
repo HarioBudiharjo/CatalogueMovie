@@ -13,12 +13,15 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<MovieItems>> {
 
-    ListView listView;
+    @BindView(R.id.list_item) ListView listView;
     MovieAdapter movieAdapter;
-    EditText etJudul;
-    Button btnCari;
+    @BindView(R.id.edtFilm) EditText etJudul;
+    @BindView(R.id.btnCari) Button btnCari;
     static String TAG = "DEBUG status :";
 
     static final String JUDUL = "JUDUL";
@@ -27,14 +30,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         movieAdapter = new MovieAdapter(this);
         movieAdapter.notifyDataSetChanged();
-        listView = findViewById(R.id.list_item);
         listView.setAdapter(movieAdapter);
-
-        etJudul = findViewById(R.id.edtFilm);
-        btnCari = findViewById(R.id.btnCari);
 
         btnCari.setOnClickListener(new View.OnClickListener() {
             @Override
