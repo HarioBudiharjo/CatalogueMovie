@@ -1,4 +1,4 @@
-package com.hariobudiharjo.cataloguemovie;
+package com.hariobudiharjo.cataloguemovie.Activity;
 
 import android.app.LoaderManager;
 import android.content.Loader;
@@ -10,6 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.hariobudiharjo.cataloguemovie.Adapter.MovieAdapter;
+import com.hariobudiharjo.cataloguemovie.Network.MovieAsyncTaskLoader;
+import com.hariobudiharjo.cataloguemovie.Model.MovieItems;
+import com.hariobudiharjo.cataloguemovie.R;
 
 import java.util.ArrayList;
 

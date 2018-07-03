@@ -2,4 +2,12 @@
     <string name="app_name">Catalogue Movie</string>
     <string name="masukan_nama_film">Masukan Nama Film</string>
     <string name="cari">Cari</string>
+    <string name="title_activity_tab">TabActivity</string>
+    <string name="tab_text_1">NOW PLAYING</string>
+    <string name="tab_text_2">UPCOMING</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.hariobudiharjo.cataloguemovie;
+package com.hariobudiharjo.cataloguemovie.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.hariobudiharjo.cataloguemovie.Model.MovieItems;
+import com.hariobudiharjo.cataloguemovie.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

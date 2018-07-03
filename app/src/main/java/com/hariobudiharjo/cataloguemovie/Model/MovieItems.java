@@ -1,4 +1,4 @@
-package com.hariobudiharjo.cataloguemovie;
+package com.hariobudiharjo.cataloguemovie.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

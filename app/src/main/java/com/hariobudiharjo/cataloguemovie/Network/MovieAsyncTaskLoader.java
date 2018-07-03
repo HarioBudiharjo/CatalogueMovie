@@ -1,10 +1,12 @@
-package com.hariobudiharjo.cataloguemovie;
+package com.hariobudiharjo.cataloguemovie.Network;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.hariobudiharjo.cataloguemovie.BuildConfig;
+import com.hariobudiharjo.cataloguemovie.Model.MovieItems;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.SyncHttpClient;
 
