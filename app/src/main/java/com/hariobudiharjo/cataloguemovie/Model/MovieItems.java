@@ -1,10 +1,16 @@
 package com.hariobudiharjo.cataloguemovie.Model;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.hariobudiharjo.cataloguemovie.Provider.DatabaseContract;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.hariobudiharjo.cataloguemovie.Provider.DatabaseContract.getColumnInt;
+import static com.hariobudiharjo.cataloguemovie.Provider.DatabaseContract.getColumnString;
 
 public class MovieItems implements Parcelable {
     private int id;
@@ -12,6 +18,12 @@ public class MovieItems implements Parcelable {
     private String deskripsi;
     private String gambar;
     private String release;
+
+    private static String ID = "id";
+    private static String JUDUL = "judul";
+    private static String DESKRIPSI = "deskripsi";
+    private static String GAMBAR = "gambar";
+    private static String RELEASE = "rilis";
 
     public MovieItems() {
     }
@@ -30,6 +42,19 @@ public class MovieItems implements Parcelable {
         this.deskripsi = deskripsi;
         this.gambar = gambar;
         this.release = release;
+    }
+
+    public MovieItems(Cursor cursor) {
+//        this.id = getColumnInt(cursor, ID);
+//        this.title = getColumnString(cursor, DatabaseContract.NoteColumns.TITLE);
+//        this.description = getColumnString(cursor, DatabaseContract.NoteColumns.DESCRIPTION);
+//        this.date = getColumnString(cursor, DatabaseContract.NoteColumns.DATE);
+
+        this.id = getColumnInt(cursor, ID);
+        this.judul = getColumnString(cursor, JUDUL);
+        this.deskripsi = getColumnString(cursor, DESKRIPSI);
+        this.gambar = getColumnString(cursor, GAMBAR);
+        this.release = getColumnString(cursor, RELEASE);
     }
 
     public void setId(int id) {

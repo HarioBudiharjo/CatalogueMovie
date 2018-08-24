@@ -2,10 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.hariobudiharjo.cataloguemovie.Activity.TabActivity">
-    <item
-        android:id="@+id/search"
-        android:icon="@drawable/ic_search_black"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="always" />
+    <group android:menuCategory="container">
+        <item android:id="@+id/abIndo"
+            android:title="Indonesia" />
+        <item android:id="@+id/abEnglish"
+            android:title="English" />
+    </group>
 </menu>

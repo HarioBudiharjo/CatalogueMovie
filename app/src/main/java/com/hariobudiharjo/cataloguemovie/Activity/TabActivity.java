@@ -1,6 +1,9 @@
 package com.hariobudiharjo.cataloguemovie.Activity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.database.Cursor;
+import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,25 +16,60 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
+import com.hariobudiharjo.cataloguemovie.Fragment.FavoriteFragment;
 import com.hariobudiharjo.cataloguemovie.Fragment.NowPlayingFragment;
 import com.hariobudiharjo.cataloguemovie.R;
 import com.hariobudiharjo.cataloguemovie.Fragment.UpComingFragment;
+import com.hariobudiharjo.cataloguemovie.Util.SPManager;
+
+import java.util.Locale;
+
+import static com.hariobudiharjo.cataloguemovie.Provider.DatabaseContract.CONTENT_URI;
 
 public class TabActivity extends AppCompatActivity {
 
     private String TAG = "DEBUG";
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    private SPManager pref;
 
     private ViewPager mViewPager;
+
+    private Cursor list;
+
+    private static String ID = "id";
+    private static String JUDUL = "judul";
+    private static String DESKRIPSI = "deskripsi";
+    private static String GAMBAR = "gambar";
+    private static String RELEASE = "rilis";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        list = getContentResolver().query(CONTENT_URI, null, null, null, null);
+
+        while (list.moveToNext()) {
+            Log.d(TAG+"CURSOR", "onCreate: " + list.getString(list.getColumnIndex(JUDUL))+" : "+list.getString(list.getColumnIndex(ID)));
+        }
+        Log.d(TAG, "onCreate: " + list.toString());
+        pref = new SPManager(this);
+        String languageToLoad = pref.getBahasa();
+        Locale locale = new Locale(languageToLoad);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+
         setContentView(R.layout.activity_tab);
 
-        Toolbar toolbar =  findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -43,7 +81,7 @@ public class TabActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-        FloatingActionButton fab =  findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,9 +91,35 @@ public class TabActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_tab, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.abIndo:
+                pref.setBahasa("id");
+                finish();
+                startActivity(getIntent());
+                return true;
+            case R.id.abEnglish:
+                pref.setBahasa("en");
+                finish();
+                startActivity(getIntent());
+                return true;
+            default:
+                return true;
+        }
+    }
+
     private void goToSearch() {
         startActivity(new Intent(this, MainActivity.class));
     }
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -72,6 +136,9 @@ public class TabActivity extends AppCompatActivity {
                 case 1:
                     UpComingFragment upComingFragment = new UpComingFragment();
                     return upComingFragment;
+                case 2:
+                    FavoriteFragment favoriteFragment = new FavoriteFragment();
+                    return favoriteFragment;
             }
             return null;
         }
@@ -79,7 +146,7 @@ public class TabActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 2;
+            return 3;
         }
     }
 }

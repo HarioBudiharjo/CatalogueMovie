@@ -23,10 +23,13 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<MovieItems>> {
 
-    @BindView(R.id.list_item) ListView listView;
+    @BindView(R.id.list_item)
+    ListView listView;
     MovieAdapter movieAdapter;
-    @BindView(R.id.edtFilm) EditText etJudul;
-    @BindView(R.id.btnCari) Button btnCari;
+    @BindView(R.id.edtFilm)
+    EditText etJudul;
+    @BindView(R.id.btnCari)
+    Button btnCari;
     static String TAG = "DEBUG status :";
 
     static final String JUDUL = "JUDUL";
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         movieAdapter.notifyDataSetChanged();
         listView.setAdapter(movieAdapter);
 
+        String cari = getResources().getString(R.string.cari);
+        btnCari.setText(cari);
         btnCari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -7,33 +7,59 @@
     android:orientation="vertical"
     tools:context=".Activity.DetailMovieActivity">
 
-    <ImageView
-        android:id="@+id/imageMovieDetail"
+    <android.support.design.widget.CollapsingToolbarLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        app:srcCompat="@mipmap/ic_launcher" />
+        android:layout_height="wrap_content"
+        app:expandedTitleGravity="top"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+        <ImageView
+            android:id="@+id/imageMovieDetail"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:layout_collapseMode="parallax"
+            app:layout_collapseParallaxMultiplier="0.5"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+    </android.support.design.widget.CollapsingToolbarLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5">
 
-        <TextView
-            android:text="judul"
-            android:id="@+id/textJudulDetail"
+        <LinearLayout
+            android:layout_weight="4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TextView
-            android:text=" (18-juli-1997)"
-            android:id="@+id/textReleaseDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/textJudulDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="judul" />
+
+            <TextView
+                android:id="@+id/textReleaseDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" (18-juli-1997)" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/ibFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_star_border_black_24dp" />
+
     </LinearLayout>
 
     <TextView
-        android:text="Lorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blabla"
         android:id="@+id/textDeskripsiDetail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:text="Lorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blabla" />
 </LinearLayout>
