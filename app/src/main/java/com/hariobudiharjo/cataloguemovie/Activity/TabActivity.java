@@ -3,11 +3,8 @@ package com.hariobudiharjo.cataloguemovie.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -22,17 +19,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.hariobudiharjo.cataloguemovie.Notification.AlarmReceiver;
 import com.hariobudiharjo.cataloguemovie.Fragment.FavoriteFragment;
 import com.hariobudiharjo.cataloguemovie.Fragment.NowPlayingFragment;
 import com.hariobudiharjo.cataloguemovie.R;
 import com.hariobudiharjo.cataloguemovie.Fragment.UpComingFragment;
 import com.hariobudiharjo.cataloguemovie.Util.SPManager;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import static com.hariobudiharjo.cataloguemovie.Provider.DatabaseContract.CONTENT_URI;
 
 public class TabActivity extends AppCompatActivity {
+
+    private AlarmReceiver alarmReceiver;
 
     private String TAG = "DEBUG";
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -52,10 +54,23 @@ public class TabActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.d(TAG, "onCreate savedInstanceState: " + savedInstanceState);
+
+        Date today = new Date();
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String dateToStr = format.format(today);
+//        System.out.println(dateToStr);
+
+        Log.d(TAG, "onCreate WAKTU: " + dateToStr);
+
+        alarmReceiver = new AlarmReceiver();
+        alarmReceiver.setRepeatingAlarm(this, "Catalogue Movie!", "07:00", "Catalogue Movie missing you!!!", 102);
+        alarmReceiver.setRepeatingAlarm(this, "Catalogue Movie", "08:00", "list movie!!!", 101);
         list = getContentResolver().query(CONTENT_URI, null, null, null, null);
 
         while (list.moveToNext()) {
-            Log.d(TAG+"CURSOR", "onCreate: " + list.getString(list.getColumnIndex(JUDUL))+" : "+list.getString(list.getColumnIndex(ID)));
+            Log.d(TAG + "CURSOR", "onCreate: " + list.getString(list.getColumnIndex(JUDUL)) + " : " + list.getString(list.getColumnIndex(ID)));
         }
         Log.d(TAG, "onCreate: " + list.toString());
         pref = new SPManager(this);

@@ -50,8 +50,7 @@ public class DetailMovieActivity extends AppCompatActivity {
 
 
         tvJudul.setText(judul);
-        tvDeskripsi.setText(deskripsi + "Lorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blablaLorem ipsum blabla" +
-                "");
+        tvDeskripsi.setText(deskripsi);
         tvrelease.setText(" ( " + release + " )");
         Glide.with(this)
                 .load(image)

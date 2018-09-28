@@ -2,6 +2,7 @@ package com.hariobudiharjo.cataloguemovie.Fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,6 +36,11 @@ public class UpComingFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelableArrayList("upcoming", movieItems);
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +51,16 @@ public class UpComingFragment extends Fragment {
         rvCategory.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMovieAdapter = new RVMovieAdapter(getContext());
         rvCategory.setAdapter(rvMovieAdapter);
-        getUpComing();
+        if (savedInstanceState == null) {
+            Log.d(TAG, "onCreateView: isi" + savedInstanceState);
+            Log.d(TAG, "onCreateView: masuk kosong savedinstancestate");
+            getUpComing();
+        } else {
+            Log.d(TAG, "onCreateView: masuk savedinstancestate");
+            rvMovieAdapter.setListMovie(savedInstanceState.<MovieItems>getParcelableArrayList("upcoming"));
+//            rvMovieAdapter.notifyDataSetChanged();
+        }
+        setRetainInstance(true);
         return view;
     }
 

@@ -25,6 +25,17 @@ public class MovieItems implements Parcelable {
     private static String GAMBAR = "gambar";
     private static String RELEASE = "rilis";
 
+    @Override
+    public String toString() {
+        return "MovieItems{" +
+                "id=" + id +
+                ", judul='" + judul + '\'' +
+                ", deskripsi='" + deskripsi + '\'' +
+                ", gambar='" + gambar + '\'' +
+                ", release='" + release + '\'' +
+                '}';
+    }
+
     public MovieItems() {
     }
 

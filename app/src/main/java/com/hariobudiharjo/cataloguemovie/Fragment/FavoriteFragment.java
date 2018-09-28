@@ -2,6 +2,7 @@ package com.hariobudiharjo.cataloguemovie.Fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,19 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hariobudiharjo.cataloguemovie.Adapter.RVMovieAdapter;
-import com.hariobudiharjo.cataloguemovie.BuildConfig;
 import com.hariobudiharjo.cataloguemovie.Helper.MovieHelper;
 import com.hariobudiharjo.cataloguemovie.Model.MovieItems;
 import com.hariobudiharjo.cataloguemovie.R;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-import cz.msebera.android.httpclient.Header;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,10 +33,19 @@ public class FavoriteFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelableArrayList("favorite", movieItems);
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+//            someStateValue = savedInstanceState.getInt(SOME_VALUE_KEY);
+            // Lakukan ssesuatu dengan someStateValue jika diperlukan
+        }
         // Inflate the layout for this fragment
         MovieHelper movieHelper = new MovieHelper(getContext());
         movieHelper.open();
@@ -57,7 +59,16 @@ public class FavoriteFragment extends Fragment {
         rvCategory.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMovieAdapter = new RVMovieAdapter(getContext());
         rvCategory.setAdapter(rvMovieAdapter);
-        getFavorite();
+        if (savedInstanceState == null) {
+            Log.d(TAG, "onCreateView: isi" + savedInstanceState);
+            Log.d(TAG, "onCreateView: masuk kosong savedinstancestate");
+            getFavorite();
+        } else {
+            Log.d(TAG, "onCreateView: masuk savedinstancestate");
+            rvMovieAdapter.setListMovie(savedInstanceState.<MovieItems>getParcelableArrayList("favorite"));
+//            rvMovieAdapter.notifyDataSetChanged();
+        }
+        setRetainInstance(true);
         return view;
     }
 

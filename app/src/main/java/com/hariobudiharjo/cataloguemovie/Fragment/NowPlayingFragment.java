@@ -2,6 +2,7 @@ package com.hariobudiharjo.cataloguemovie.Fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,10 +46,24 @@ public class NowPlayingFragment extends Fragment {
         rvCategory.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMovieAdapter = new RVMovieAdapter(getContext());
         rvCategory.setAdapter(rvMovieAdapter);
-        getNowPlaying();
-
-
+//        if (savedInstanceState == null || savedInstanceState.containsKey("nowplaying")) {
+        if (savedInstanceState == null) {
+            Log.d(TAG, "onCreateView: isi" + savedInstanceState);
+            Log.d(TAG, "onCreateView: masuk kosong savedinstancestate");
+            getNowPlaying();
+        } else {
+            Log.d(TAG, "onCreateView: masuk savedinstancestate");
+            rvMovieAdapter.setListMovie(savedInstanceState.<MovieItems>getParcelableArrayList("nowplaying"));
+//            rvMovieAdapter.notifyDataSetChanged();
+        }
+        setRetainInstance(true);
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelableArrayList("nowplaying", movieItems);
+        super.onSaveInstanceState(outState);
     }
 
     private void getNowPlaying() {

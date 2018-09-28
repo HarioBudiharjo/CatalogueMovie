@@ -11,6 +11,8 @@
         android:weightSum="1">
 
         <ImageView
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
             android:id="@+id/imageMovieRV"
             android:layout_weight="0.2"
             android:layout_width="100dp"
